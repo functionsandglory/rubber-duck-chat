@@ -32,7 +32,8 @@ const Chat: FC = () => (
                <Box sx={{
                     width: {
                         xs: '100%',
-                        sm: '600px'
+                        sm: '600px',
+                        md: '800px',
                     }
                }}>
                     <Footer/>

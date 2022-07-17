@@ -1,16 +1,14 @@
 import type {FC} from 'react';
-import {TextField, Box, Button} from '@mui/material';
-import {Send} from '@mui/icons-material';
+import {Box} from '@mui/material';
+import MessageTextArea from "./MessageTextArea";
 
 const Footer: FC = () => (
     <Box sx={{
         width: '100%',
         display: 'flex',
+        p: 2,
     }}>
-        <TextField variant={"filled"} sx={{flex: 1, mr: 1}}/>
-        <Button variant="contained" endIcon={<Send />}>
-            Send
-        </Button>
+       <MessageTextArea />
     </Box>
 
 );
