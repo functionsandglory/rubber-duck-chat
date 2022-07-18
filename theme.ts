@@ -1,12 +1,22 @@
 import { createTheme } from '@mui/material/styles';
-import { yellow } from '@mui/material/colors';
+import { yellow, grey } from '@mui/material/colors';
 
-const theme = createTheme({
+const mainTheme = createTheme({
     palette: {
+        //mode: 'dark',
         primary: {
-            main: yellow[200],
+            main: yellow[100],
         },
     },
 });
 
-export default theme;
+export const neutralInputTheme = createTheme({
+    palette: {
+        //mode: 'dark',
+        primary: {
+            main: grey[500],
+        },
+    },
+});
+
+export default mainTheme;
