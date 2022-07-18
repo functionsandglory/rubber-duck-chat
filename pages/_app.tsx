@@ -2,7 +2,7 @@ import type {FC} from 'react';
 import type {AppProps} from 'next/app';
 import {CssBaseline, GlobalStyles} from "@mui/material";
 import {ThemeProvider} from '@mui/material/styles';
-import theme from '../theme';
+import theme from '../style/theme';
 console.log(theme);
 const App: FC<AppProps> = ({Component, pageProps}) => {
     return (
