@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import messagesSliceReducer from './messages-slice';
 
 const store = configureStore({
     reducer: {
-        one: messagesSliceReducer,
+        messages: messagesSliceReducer,
     },
 });
 

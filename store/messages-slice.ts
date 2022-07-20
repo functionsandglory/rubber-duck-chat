@@ -1,15 +1,25 @@
-import {createSlice, createEntityAdapter} from '@reduxjs/toolkit';
+import {
+    createSlice,
+    createEntityAdapter,
+    PayloadAction
+} from '@reduxjs/toolkit';
+import { v4 as uuid } from 'uuid';
 
-export enum Senders {
-    USER='user',
-    DUCK='duck'
+export enum MessageType {
+    SENT = 'sent',
+    RECEIVED = 'received',
 }
 
 export type Message = {
     id: string | number,
-    sender: Senders,
+    type: MessageType,
     message: string,
-    sendOn: Date,
+    sentOn: Date,
+};
+
+export type NewMessage = {
+    message: string,
+    type: MessageType,
 };
 
 const messageAdapter = createEntityAdapter<Message>();
@@ -18,7 +28,14 @@ const messageSlice = createSlice({
     name: 'messages',
     initialState: messageAdapter.getInitialState(),
     reducers: {
-        addMessage: messageAdapter.addOne,
+        addMessage: (state, action: PayloadAction<NewMessage>) => {
+            messageAdapter.addOne(state, {
+                id: uuid(),
+                sentOn: new Date(),
+                message: action.payload.message,
+                type: action.payload.type,
+            })
+        },
     },
 })
 
