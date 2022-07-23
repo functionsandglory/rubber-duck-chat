@@ -14,7 +14,7 @@ export type Message = {
     id: string | number,
     type: MessageType,
     message: string,
-    sentOn: Date,
+    sentOn: string,
 };
 
 export type NewMessage = {
@@ -22,24 +22,23 @@ export type NewMessage = {
     type: MessageType,
 };
 
-const messageAdapter = createEntityAdapter<Message>();
+export const messagesAdapter = createEntityAdapter<Message>();
 
 const messageSlice = createSlice({
     name: 'messages',
-    initialState: messageAdapter.getInitialState(),
+    initialState: messagesAdapter.getInitialState(),
     reducers: {
         addMessage: (state, action: PayloadAction<NewMessage>) => {
-            messageAdapter.addOne(state, {
+            messagesAdapter.addOne(state, {
                 id: uuid(),
-                sentOn: new Date(),
+                sentOn: new Date().toISOString(),
                 message: action.payload.message,
                 type: action.payload.type,
-            })
+            });
         },
     },
 })
 
 const {reducer, actions} = messageSlice;
-
 export const {addMessage} = actions;
 export default reducer;

@@ -5,7 +5,8 @@ import {
     Toolbar,
 } from '@mui/material';
 import Header from './Header';
-import Footer from './Footer'
+import Footer from './Footer';
+import Messages from './Messages';
 
 const Chat: FC = () => (
     <Box sx={{
@@ -20,9 +21,21 @@ const Chat: FC = () => (
                 </Toolbar>
             </AppBar>
         </header>
-        <main style={{flex: 1}}>
-            body
-        </main>
+        <Box component={'main'} sx={{
+            flex: 1,
+            p: 2,
+        }}>
+            <Box sx={{
+                margin: '0 auto',
+                width: {
+                    xs: '100%',
+                    sm: '600px',
+                    md: '800px',
+                }
+            }}>
+                <Messages/>
+            </Box>
+        </Box>
        <footer>
            <Toolbar sx={{
                display: 'flex',
