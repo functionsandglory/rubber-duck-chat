@@ -10,7 +10,7 @@ import Messages from './Messages';
 
 const Chat: FC = () => (
     <Box sx={{
-        flex: 1,
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
     }}>
@@ -24,6 +24,8 @@ const Chat: FC = () => (
         <Box component={'main'} sx={{
             flex: 1,
             p: 2,
+            minHeight: '0',
+            overflowY: 'auto',
         }}>
             <Box sx={{
                 margin: '0 auto',

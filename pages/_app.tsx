@@ -13,13 +13,8 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
             <ThemeProvider theme={theme}>
                 <GlobalStyles styles={{
                     'html, body, #__next': {
-                        height: '100%'
+                        height: '100%',
                     },
-                    '#__next': {
-                        display: 'flex',
-                        flex: 1,
-                        flexDirection: 'column',
-                    }
                 }}/>
                 <CssBaseline/>
                 <Component {...pageProps} />
