@@ -1,9 +1,9 @@
 import type {FC} from 'react';
-import Chat from '../components/Chat';
+import App from '../components/App';
 
 const Home: FC = () => {
     return (
-        <Chat/>
+        <App/>
     );
 }
 

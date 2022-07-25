@@ -1,43 +1,29 @@
-import {FC, useState} from 'react';
-import {Box} from '@mui/material';
-import MessageTextArea from "./MessageTextArea";
-import useMessages from "../hooks/use-messages";
-import {MessageType} from "../store/messages-slice";
+import {FC, ReactNode} from 'react';
+import {Box, Toolbar} from "@mui/material";
+import NewMessageForm from "./NewMessageForm";
 
-const ENTER_CODE = 'Enter';
-
-const Footer: FC = () => {
-    const [message, setMessage] = useState<string>('');
-    const {addMessage} = useMessages();
-
-    const handleKeyDown = (event) => {
-        if (event.code === ENTER_CODE) {
-            addMessage({
-                message: message,
-                type: MessageType.SENT
-            });
-            setMessage('');
-            event.preventDefault();
-        }
-    };
-
-    const handleOnChange = (event) => {
-        setMessage(event.target.value);
-    }
-
-    return (
-        <Box sx={{
-            width: '100%',
-            display: 'flex',
-            p: 2,
-        }}>
-            <MessageTextArea
-                value={message}
-                onChange={handleOnChange}
-                onKeyDown={handleKeyDown}
-            />
-        </Box>
-    )
+type Props = {
+    children?: ReactNode,
 };
+
+const Footer: FC<Props> = ({children}) => (
+    <footer>
+        <Toolbar sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}>
+            <Box sx={{
+                width: {
+                    xs: '100%',
+                    sm: '600px',
+                    md: '800px',
+                }
+            }}>
+                {children}
+            </Box>
+        </Toolbar>
+    </footer>
+);
 
 export default Footer;

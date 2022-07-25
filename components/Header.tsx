@@ -1,10 +1,18 @@
-import type {FC} from 'react';
-import {Typography} from "@mui/material";
+import type {FC, ReactNode} from 'react';
+import {AppBar, Toolbar} from "@mui/material";
 
-const Header: FC = () => (
-    <Typography variant="h6" color="inherit" component="div">
-        Dr. Quack
-    </Typography>
+type Props = {
+    children?: ReactNode,
+};
+
+const Header: FC<Props> = ({children}) => (
+    <header>
+        <AppBar position={"static"}>
+            <Toolbar>
+                {children}
+            </Toolbar>
+        </AppBar>
+    </header>
 );
 
 export default Header;

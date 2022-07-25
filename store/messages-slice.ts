@@ -3,7 +3,7 @@ import {
     createEntityAdapter,
     PayloadAction
 } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 export enum MessageType {
     SENT = 'sent',
@@ -35,6 +35,13 @@ const messageSlice = createSlice({
                 message: action.payload.message,
                 type: action.payload.type,
             });
+
+            messagesAdapter.addOne(state, {
+                id: uuid(),
+                sentOn: new Date().toISOString(),
+                message: `echo: ${action.payload.message}`,
+                type: MessageType.RECEIVED,
+            })
         },
     },
 })
