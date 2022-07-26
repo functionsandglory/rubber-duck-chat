@@ -1,5 +1,5 @@
 import type {FC, ReactNode} from 'react';
-import {AppBar, Toolbar} from "@mui/material";
+import {AppBar, Toolbar} from '@mui/material';
 
 type Props = {
     children?: ReactNode,
@@ -7,7 +7,7 @@ type Props = {
 
 const Header: FC<Props> = ({children}) => (
     <header>
-        <AppBar position={"static"}>
+        <AppBar position={"relative"}>
             <Toolbar>
                 {children}
             </Toolbar>

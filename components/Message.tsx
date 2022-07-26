@@ -1,28 +1,28 @@
 import {FC} from 'react';
-import {Box, Typography} from "@mui/material";
-import {MessageType} from "../store/messages-slice";
-import {lightBlue} from "@mui/material/colors";
+import {Box, Typography} from '@mui/material';
+import {Message, MessageType} from '../store/messages-slice';
+import moment from 'moment';
 
 type Props = {
-    message: string,
-    type: MessageType,
+    message: Message,
+    color: string,
 };
 
-const Message: FC<Props> = ({message, type}) => {
-    const isSent = type === MessageType.SENT;
-    const isReceived = !isSent;
-
+const Message: FC<Props> = ({message, color}) => {
     return (
         <Box sx={{
-            mb: 2,
+            display: 'inline-block',
             p: 1,
             width: '300px',
-            ml: isSent ? 'auto' : 0,
-            mr: isReceived ? 'auto' : 0,
-            backgroundColor: (theme) => isSent ? lightBlue[100] : theme.palette.primary.main,
+            backgroundColor: color,
             borderRadius: (theme) => theme.spacing(1)
         }}>
-            <Typography>{message}</Typography>
+            <Typography>
+                {message.message}
+            </Typography>
+            <Typography variant={'subtitle1'} textAlign={'right'}>
+                {moment(message.sentOn).format('M/D/YY h:mma')}
+            </Typography>
         </Box>
     )
 };

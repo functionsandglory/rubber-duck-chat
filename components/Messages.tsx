@@ -1,20 +1,20 @@
-import React, {FC} from "react";
-import Message from './Message';
-import useMessages from "../hooks/use-messages";
+import React, {FC} from 'react';
+import {MessageType} from '../store/messages-slice';
+import useMessages from '../hooks/use-messages';
+import SentMessage from './SentMessage';
+import ReceivedMessage from './ReceivedMessage';
 
 const Messages: FC = () => {
     const {messages} = useMessages();
-
+    
     return (
         <React.Fragment>
             {
-                messages.map((message) => (
-                    <Message
-                        key={message.id}
-                        message={message.message}
-                        type={message.type}
-                    />
-                ))
+                messages.map((message) => {
+                    return message.type == MessageType.SENT
+                        ? <SentMessage key={message.id} message={message} />
+                        : <ReceivedMessage key={message.id} message={message} />
+                })
             }
         </React.Fragment>
     )

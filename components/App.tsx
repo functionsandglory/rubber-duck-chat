@@ -6,16 +6,17 @@ import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
 import Messages from './Messages';
-import NewMessageForm from "./NewMessageForm";
+import NewMessageForm from './NewMessageForm';
 
 const App: FC = () => (
     <Box sx={{
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        backgroundColor: 'grey.100'
     }}>
        <Header>
-           <Typography variant="h6" color="inherit" component="div">
+           <Typography variant='h6' color='inherit' component='div'>
                Dr. Quack
            </Typography>
        </Header>
