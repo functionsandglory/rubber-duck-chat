@@ -13,6 +13,8 @@ const mainTheme = createTheme({
     },
 });
 
+console.log(mainTheme);
+
 export const neutralInputTheme = createTheme({
     palette: {
         //mode: 'dark',

@@ -1,12 +1,13 @@
 import type {FC} from 'react';
 import {
-    Box, Typography,
+    Box,
 } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
 import Messages from './Messages';
 import NewMessageForm from './NewMessageForm';
+import Title from './Title';
 
 const App: FC = () => (
     <Box sx={{
@@ -16,9 +17,7 @@ const App: FC = () => (
         backgroundColor: 'grey.100'
     }}>
        <Header>
-           <Typography variant='h6' color='inherit' component='div'>
-               Dr. Quack
-           </Typography>
+          <Title/>
        </Header>
        <Content>
            <Messages/>

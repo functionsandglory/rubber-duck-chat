@@ -1,7 +1,8 @@
 import {FC} from 'react';
 import {Box, Typography} from '@mui/material';
-import {Message, MessageType} from '../store/messages-slice';
 import moment from 'moment';
+import {Message} from '../store/messages-slice';
+
 
 type Props = {
     message: Message,
@@ -20,7 +21,7 @@ const Message: FC<Props> = ({message, color}) => {
             <Typography>
                 {message.message}
             </Typography>
-            <Typography variant={'subtitle1'} textAlign={'right'}>
+            <Typography variant={'body2'} textAlign={'right'} color={'text.secondary'}>
                 {moment(message.sentOn).format('M/D/YY h:mma')}
             </Typography>
         </Box>

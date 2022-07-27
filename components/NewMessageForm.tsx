@@ -38,7 +38,7 @@ const NewMessageForm: FC = () => {
                     onChange={handleOnChange}
                 />
             </Box>
-            <Box>
+            <Box sx={{mb: '3px'}}>
                 <IconButton
                     color={"secondary"}
                     size={"large"}
