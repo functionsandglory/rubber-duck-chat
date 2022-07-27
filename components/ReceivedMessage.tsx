@@ -18,6 +18,7 @@ const ReceivedMessage: FC<Props> = ({message}) => {
             justifyContent: 'flex-start',
             alignItems: 'flex-end',
             mb: 2,
+            mr: 3,
         }}>
             <Box sx={{mr: 1}}>
                 <DuckAvatar size={50}/>

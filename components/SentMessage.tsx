@@ -14,6 +14,7 @@ const SentMessage: FC<Props> = ({message}) => (
         flexDirection: 'row',
         justifyContent: 'flex-end',
         mb: 2,
+        ml: 3,
     }}>
         <Message message={message} color={lightBlue[100]}/>
     </Box>
