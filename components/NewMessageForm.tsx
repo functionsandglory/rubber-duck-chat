@@ -27,7 +27,9 @@ const NewMessageForm: FC = () => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'flex-end',
-            p: 2,
+            pl: 2,
+            pr: 2,
+            pb: 2
         }}>
             <Box sx={{
                 flex: 1,
