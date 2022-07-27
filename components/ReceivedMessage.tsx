@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Box} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
-import MessageComponent from './Message';
+import MessageComponent, {Direction} from './Message';
 import DuckAvatar from './DuckAvatar';
 import {Message} from '../store/messages-slice'
 
@@ -23,7 +23,11 @@ const ReceivedMessage: FC<Props> = ({message}) => {
             <Box sx={{mr: 1}}>
                 <DuckAvatar size={50}/>
             </Box>
-            <MessageComponent message={message} color={theme.palette.primary.main}/>
+            <MessageComponent
+                message={message}
+                color={theme.palette.primary.main}
+                direction={Direction.LEFT}
+            />
         </Box>
     )
 };

@@ -1,7 +1,8 @@
 import {
     createSlice,
     createEntityAdapter,
-    PayloadAction
+    createAsyncThunk,
+    PayloadAction,
 } from '@reduxjs/toolkit';
 import {v4 as uuid} from 'uuid';
 
@@ -23,6 +24,14 @@ export type NewMessage = {
 };
 
 export const messagesAdapter = createEntityAdapter<Message>();
+
+const sendMessage = createAsyncThunk('sendMessage', () => {
+
+});
+
+const receiveMessage = createAsyncThunk('receiveMessage', () => {
+
+});
 
 const messageSlice = createSlice({
     name: 'messages',

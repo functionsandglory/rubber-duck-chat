@@ -1,22 +1,35 @@
 import {FC} from 'react';
 import {Box, Typography} from '@mui/material';
+import {useTheme} from '@mui/system';
 import moment from 'moment';
 import {Message} from '../store/messages-slice';
 
+export enum Direction {
+    LEFT = 'left',
+    RIGHT = 'right'
+}
 
 type Props = {
     message: Message,
     color: string,
+    direction: Direction
 };
 
-const Message: FC<Props> = ({message, color}) => {
+const Message: FC<Props> = ({message, color, direction= Direction.RIGHT}) => {
+    const theme = useTheme();
+    const borderRadiusSize = theme.spacing(2);
+
+    const borderRadius = direction === Direction.LEFT
+        ?  `${borderRadiusSize}  ${borderRadiusSize} ${borderRadiusSize} 0`
+        :  `${borderRadiusSize} ${borderRadiusSize} 0 ${borderRadiusSize}`
+
     return (
         <Box sx={{
             display: 'inline-block',
             p: 1,
-            width: '300px',
+            maxWidth: '300px',
             backgroundColor: color,
-            borderRadius: (theme) => theme.spacing(1)
+            borderRadius: borderRadius,
         }}>
             <Typography>
                 {message.message}
