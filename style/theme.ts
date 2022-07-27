@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { yellow, grey } from '@mui/material/colors';
+import { yellow, grey, deepPurple } from '@mui/material/colors';
 
 const mainTheme = createTheme({
     palette: {
@@ -7,6 +7,9 @@ const mainTheme = createTheme({
         primary: {
             main: yellow[100],
         },
+        secondary: {
+            main: deepPurple[900],
+        }
     },
 });
 

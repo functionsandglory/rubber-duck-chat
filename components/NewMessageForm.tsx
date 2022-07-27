@@ -1,5 +1,5 @@
 import {FC, useState} from 'react';
-import {Box, IconButton, Button} from '@mui/material';
+import {Box, IconButton} from '@mui/material';
 import {Send} from '@mui/icons-material';
 import MessageTextArea from './MessageTextArea';
 import useMessages from '../hooks/use-messages';
@@ -9,7 +9,7 @@ const NewMessageForm: FC = () => {
     const [message, setMessage] = useState<string>('');
     const {addMessage} = useMessages();
 
-    const handleClick = (event) => {
+    const handleClick = () => {
         addMessage({
             message: message,
             type: MessageType.SENT
@@ -26,11 +26,11 @@ const NewMessageForm: FC = () => {
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
+            alignItems: 'flex-end',
             p: 2,
         }}>
             <Box sx={{
                 flex: 1,
-                flexDirection: 'row',
                 mr: 1,
             }}>
                 <MessageTextArea
@@ -38,17 +38,15 @@ const NewMessageForm: FC = () => {
                     onChange={handleOnChange}
                 />
             </Box>
-            <Button
-                variant={"contained"}
-                color={"secondary"}
-                size={"small"}
-                onClick={handleClick}
-            >
-                Send
-            </Button>
-            {/*<IconButton size={"large"}>*/}
-            {/*    <Send/>*/}
-            {/*</IconButton>*/}
+            <Box>
+                <IconButton
+                    color={"secondary"}
+                    size={"large"}
+                    onClick={handleClick}
+                >
+                    <Send/>
+                </IconButton>
+            </Box>
         </Box>
     )
 };
