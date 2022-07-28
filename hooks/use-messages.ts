@@ -1,6 +1,11 @@
 import { RootState, useAppDispatch} from '../store/store'
 import { useSelector } from 'react-redux'
-import {sendMessage, NewMessage, messagesAdapter} from '../store/messages-slice';
+import {
+    sendMessage,
+    receiveInitialMessage,
+    NewMessage,
+    messagesAdapter
+} from '../store/messages-slice';
 
 const useMessages = () => {
     const dispatch = useAppDispatch();
@@ -8,8 +13,8 @@ const useMessages = () => {
 
     return {
         messages: useSelector(selectors.selectAll),
-        addMessage: (newMessage: NewMessage) => dispatch(sendMessage(newMessage)),
-        isSending: useSelector<RootState>((state) => state.messages.isSending),
+        sendMessage: (newMessage: NewMessage) => dispatch(sendMessage(newMessage)),
+        receiveInitialMessage: () => dispatch(receiveInitialMessage()),
         isTyping: useSelector<RootState>((state) => state.messages.isTyping),
     };
 };

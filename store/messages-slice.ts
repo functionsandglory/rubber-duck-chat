@@ -4,6 +4,8 @@ import {
     createAsyncThunk,
 } from '@reduxjs/toolkit';
 import {v4 as uuid} from 'uuid';
+import {random} from 'lodash';
+import eliza from "../utility/eliza";
 import delay from '../utility/delay';
 
 export enum MessageType {
@@ -27,62 +29,70 @@ export const messagesAdapter = createEntityAdapter<Message>();
 
 export const sendMessage = createAsyncThunk('sendMessage',
     async (newMessage: NewMessage, api) => {
-        await delay(1000);
         api.dispatch(receiveMessage(newMessage));
         return newMessage;
     }
 );
 
-export const typingMessage = createAsyncThunk('typingMessage',
-    async () => {
-        await delay(1000);
-    }
-);
-
 export const receiveMessage = createAsyncThunk('receiveMessage',
     async (newMessage: NewMessage, api) => {
-        await delay(1000);
+        await delay(random(0.5, 1) * 1000);
         await api.dispatch(typingMessage());
+
         return {
-            ...newMessage,
+            message: eliza.transform(newMessage.message),
             type: MessageType.RECEIVED
         };
     }
 );
 
+export const receiveInitialMessage = createAsyncThunk('receiveInitialMessage',
+    async (undefined, api) => {
+        await api.dispatch(typingMessage());
+
+        return {
+            message: eliza.getInitial(),
+            type: MessageType.RECEIVED
+        };
+    }
+);
+
+export const typingMessage = createAsyncThunk('typingMessage',
+    async () => {
+        await delay(random(1, 3) * 1000);
+    }
+);
+
 const {ids, entities} = messagesAdapter.getInitialState();
+
+const buildMessage = (newMessage: NewMessage): Message => {
+    return {
+        id: uuid(),
+        sentOn: new Date().toISOString(),
+        message: `${newMessage.message}`,
+        type: newMessage.type,
+    };
+}
 
 const messageSlice = createSlice({
     name: 'messages',
     initialState: {
         ids,
         entities,
-        isSending: false,
         isTyping: false,
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(sendMessage.pending, (state) => {
-            state.isSending = true;
-        });
-
         builder.addCase(sendMessage.fulfilled, (state, {payload}) => {
-            state.isSending = false;
-            messagesAdapter.addOne(state, {
-                id: uuid(),
-                sentOn: new Date().toISOString(),
-                message: payload.message,
-                type: payload.type,
-            });
+            messagesAdapter.addOne(state, buildMessage(payload));
         });
 
         builder.addCase(receiveMessage.fulfilled, (state, {payload}) => {
-            messagesAdapter.addOne(state, {
-                id: uuid(),
-                sentOn: new Date().toISOString(),
-                message: `echo: ${payload.message}`,
-                type: payload.type,
-            });
+            messagesAdapter.addOne(state, buildMessage(payload));
+        });
+
+        builder.addCase(receiveInitialMessage.fulfilled, (state, {payload}) => {
+            messagesAdapter.addOne(state, buildMessage(payload));
         });
 
         builder.addCase(typingMessage.pending, (state) => {

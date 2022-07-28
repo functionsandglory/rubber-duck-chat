@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import {Box, IconButton} from '@mui/material';
 import {Send} from '@mui/icons-material';
 import MessageTextArea from './MessageTextArea';
@@ -7,10 +7,14 @@ import {MessageType} from '../store/messages-slice';
 
 const NewMessageForm: FC = () => {
     const [message, setMessage] = useState<string>('');
-    const {addMessage} = useMessages();
+    const {sendMessage, receiveInitialMessage} = useMessages();
+
+    useEffect(() => {
+        receiveInitialMessage();
+    }, []);
 
     const handleClick = () => {
-        addMessage({
+        sendMessage({
             message: message,
             type: MessageType.SENT
         });

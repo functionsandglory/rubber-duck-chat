@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
-import {MessageType} from '../store/messages-slice';
-import useMessages from '../hooks/use-messages';
 import SentMessage from './SentMessage';
 import ReceivedMessage from './ReceivedMessage';
-import SendingIndicator from './SendingIndicator';
 import TypingIndicator from './TypingIndicator';
+import {MessageType} from '../store/messages-slice';
+import useMessages from '../hooks/use-messages';
 
 const Messages: FC = () => {
     const {
         messages,
-        isSending,
         isTyping,
     } = useMessages();
     
@@ -21,9 +19,6 @@ const Messages: FC = () => {
                         ? <SentMessage key={message.id} message={message} />
                         : <ReceivedMessage key={message.id} message={message} />
                 })
-            }
-            {
-                isSending && <SendingIndicator/>
             }
             {
                 isTyping && <TypingIndicator/>
