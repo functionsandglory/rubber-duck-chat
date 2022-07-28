@@ -15,7 +15,8 @@ const useMessages = () => {
         messages: useSelector(selectors.selectAll),
         sendMessage: (newMessage: NewMessage) => dispatch(sendMessage(newMessage)),
         receiveInitialMessage: () => dispatch(receiveInitialMessage()),
-        isTyping: useSelector<RootState>((state) => state.messages.isTyping),
+        isTyping: useSelector<RootState, boolean>((state) => state.messages.isTyping),
+        awaitingResponse: useSelector<RootState, boolean>(state => state.messages.awaitingResponse),
     };
 };
 

@@ -7,7 +7,7 @@ import {MessageType} from '../store/messages-slice';
 
 const NewMessageForm: FC = () => {
     const [message, setMessage] = useState<string>('');
-    const {sendMessage, receiveInitialMessage} = useMessages();
+    const {sendMessage, receiveInitialMessage, awaitingResponse} = useMessages();
 
     useEffect(() => {
         receiveInitialMessage();
@@ -49,6 +49,7 @@ const NewMessageForm: FC = () => {
                     color={"secondary"}
                     size={"large"}
                     onClick={handleClick}
+                    disabled={awaitingResponse}
                 >
                     <Send/>
                 </IconButton>

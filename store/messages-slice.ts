@@ -2,16 +2,20 @@ import {
     createSlice,
     createEntityAdapter,
     createAsyncThunk,
+    EntityId,
+    Dictionary
 } from '@reduxjs/toolkit';
 import {v4 as uuid} from 'uuid';
 import {random} from 'lodash';
 import eliza from "../utility/eliza";
 import delay from '../utility/delay';
 
-export enum MessageType {
-    SENT = 'sent',
-    RECEIVED = 'received',
-}
+export type Messages = {
+    entities: Dictionary<Message>,
+    ids: EntityId[],
+    isTyping: boolean,
+    awaitingResponse: boolean,
+};
 
 export type Message = {
     id: string | number,
@@ -25,7 +29,13 @@ export type NewMessage = {
     type: MessageType,
 };
 
+export enum MessageType {
+    SENT = 'sent',
+    RECEIVED = 'received',
+}
+
 export const messagesAdapter = createEntityAdapter<Message>();
+const {ids, entities} = messagesAdapter.getInitialState();
 
 export const sendMessage = createAsyncThunk('sendMessage',
     async (newMessage: NewMessage, api) => {
@@ -63,8 +73,6 @@ export const typingMessage = createAsyncThunk('typingMessage',
     }
 );
 
-const {ids, entities} = messagesAdapter.getInitialState();
-
 const buildMessage = (newMessage: NewMessage): Message => {
     return {
         id: uuid(),
@@ -80,19 +88,30 @@ const messageSlice = createSlice({
         ids,
         entities,
         isTyping: false,
-    },
+        awaitingResponse: false,
+    } as Messages,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(sendMessage.fulfilled, (state, {payload}) => {
             messagesAdapter.addOne(state, buildMessage(payload));
         });
 
+        builder.addCase(sendMessage.pending, (state) => {
+            state.awaitingResponse = true;
+        });
+
         builder.addCase(receiveMessage.fulfilled, (state, {payload}) => {
             messagesAdapter.addOne(state, buildMessage(payload));
+            state.awaitingResponse = false;
+        });
+
+        builder.addCase(receiveInitialMessage.pending, (state) => {
+            state.awaitingResponse = true;
         });
 
         builder.addCase(receiveInitialMessage.fulfilled, (state, {payload}) => {
             messagesAdapter.addOne(state, buildMessage(payload));
+            state.awaitingResponse = false;
         });
 
         builder.addCase(typingMessage.pending, (state) => {
