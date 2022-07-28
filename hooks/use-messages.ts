@@ -1,6 +1,6 @@
-import store, { RootState, useAppDispatch} from '../store/store'
+import { RootState, useAppDispatch} from '../store/store'
 import { useSelector } from 'react-redux'
-import {addMessage, NewMessage, messagesAdapter} from '../store/messages-slice';
+import {sendMessage, NewMessage, messagesAdapter} from '../store/messages-slice';
 
 const useMessages = () => {
     const dispatch = useAppDispatch();
@@ -8,7 +8,9 @@ const useMessages = () => {
 
     return {
         messages: useSelector(selectors.selectAll),
-        addMessage: (newMessage: NewMessage) => dispatch(addMessage(newMessage)),
+        addMessage: (newMessage: NewMessage) => dispatch(sendMessage(newMessage)),
+        isSending: useSelector<RootState>((state) => state.messages.isSending),
+        isTyping: useSelector<RootState>((state) => state.messages.isTyping),
     };
 };
 
