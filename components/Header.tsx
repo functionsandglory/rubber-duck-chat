@@ -3,9 +3,8 @@ import {
     AppBar,
     Toolbar,
     Box,
-    IconButton
 } from '@mui/material';
-import {Info} from '@mui/icons-material';
+import AboutModal from './AboutModal';
 
 type Props = {
     children?: ReactNode,
@@ -20,9 +19,7 @@ const Header: FC<Props> = ({children}) => (
                 }}>
                     {children}
                 </Box>
-                <IconButton>
-                    <Info/>
-                </IconButton>
+                <AboutModal />
             </Toolbar>
         </AppBar>
     </header>
