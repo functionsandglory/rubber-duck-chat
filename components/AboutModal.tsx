@@ -11,7 +11,7 @@ import {
 import {Info} from '@mui/icons-material';
 import DuckAvatar from './DuckAvatar';
 
-const AboutModal:FC = () => {
+const AboutModal: FC = () => {
     const [open, setOpen] = useState<boolean>(false);
 
     return (
@@ -34,7 +34,8 @@ const AboutModal:FC = () => {
                         </Grid>
                         <Grid item sm xs={12}>
                             <Typography variant={'body1'} gutterBottom>
-                                Hello, I am Dr. Bill Quack! I graduated from Duckmouth University with a Masters in Counseling in 2004.
+                                Hello, I am Dr. Bill Quack! I graduated from Duckmouth University with a Masters in
+                                Counseling in 2004.
                             </Typography>
                             <Typography variant={'body1'} gutterBottom>
                                 I enjoy long swims around the pond and I love to go bread tasting.
@@ -46,8 +47,24 @@ const AboutModal:FC = () => {
                                 I am excited for the opportunity to listen to you!
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Grid item container justifyContent={'center'}>
+                        <Grid item
+                              container
+                              justifyContent={'center'}
+                              alignContent={'center'}
+                              direction={'column'}
+                              textAlign={'center'}
+                        >
+                            <Grid item>
+                                <Link
+                                    color={'secondary'}
+                                    underline={'none'}
+                                    target={'_blank'}
+                                    href={'https://en.wikipedia.org/wiki/Rubber_duck_debugging'}
+                                >
+                                    What is rubber duck debugging?
+                                </Link>
+                            </Grid>
+                            <Grid item>
                                 <Link
                                     color={'secondary'}
                                     underline={'none'}
