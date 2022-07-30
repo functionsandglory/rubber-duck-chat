@@ -15,26 +15,32 @@ type Props = {
     direction: Direction
 };
 
-const Message: FC<Props> = ({message, color, direction= Direction.RIGHT}) => {
+const Message: FC<Props> = ({message, color, direction = Direction.RIGHT}) => {
     const theme = useTheme();
     const borderRadiusSize = theme.spacing(2);
 
     const borderRadius = direction === Direction.LEFT
-        ?  `${borderRadiusSize}  ${borderRadiusSize} ${borderRadiusSize} 0`
-        :  `${borderRadiusSize} ${borderRadiusSize} 0 ${borderRadiusSize}`
+        ? `${borderRadiusSize}  ${borderRadiusSize} ${borderRadiusSize} 0`
+        : `${borderRadiusSize} ${borderRadiusSize} 0 ${borderRadiusSize}`
 
     return (
-        <Box sx={{
-            display: 'inline-block',
-            p: 1,
-            maxWidth: '300px',
-            backgroundColor: color,
-            borderRadius: borderRadius,
-        }}>
+        <Box
+            sx={{
+                display: 'inline-block',
+                p: 1,
+                maxWidth: '300px',
+                backgroundColor: color,
+                borderRadius: borderRadius,
+            }}
+        >
             <Typography>
                 {message.message}
             </Typography>
-            <Typography variant={'body2'} textAlign={'right'} color={'text.secondary'}>
+            <Typography
+                variant={'body2'}
+                textAlign={'right'}
+                color={'text.secondary'}
+            >
                 {moment(message.sentOn).format('M/D/YY h:mma')}
             </Typography>
         </Box>

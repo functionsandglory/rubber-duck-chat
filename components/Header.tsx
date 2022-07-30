@@ -2,7 +2,7 @@ import type {FC, ReactNode} from 'react';
 import {
     AppBar,
     Toolbar,
-    Box,
+    Grid
 } from '@mui/material';
 import AboutModal from './AboutModal';
 
@@ -11,18 +11,29 @@ type Props = {
 };
 
 const Header: FC<Props> = ({children}) => (
-    <header>
-        <AppBar position={"relative"}>
-            <Toolbar>
-                <Box sx={{
-                    flex: 1,
-                }}>
+    <AppBar
+        position={"relative"}
+    >
+        <Toolbar>
+            <Grid
+                container
+                alignItems={'center'}
+            >
+                <Grid
+                    item
+                    xs
+                >
                     {children}
-                </Box>
-                <AboutModal />
-            </Toolbar>
-        </AppBar>
-    </header>
+                </Grid>
+                <Grid
+                    item
+                    xs={'auto'}
+                >
+                    <AboutModal/>
+                </Grid>
+            </Grid>
+        </Toolbar>
+    </AppBar>
 );
 
 export default Header;

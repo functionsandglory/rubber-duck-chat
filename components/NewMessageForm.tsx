@@ -1,5 +1,5 @@
 import {FC, useState, useEffect} from 'react';
-import {Box, IconButton} from '@mui/material';
+import {Grid, IconButton} from '@mui/material';
 import {Send} from '@mui/icons-material';
 import MessageTextArea from './MessageTextArea';
 import useMessages from '../hooks/use-messages';
@@ -25,36 +25,47 @@ const NewMessageForm: FC = () => {
         setMessage(event.target.value);
     }
 
+    const cantSend = () => {
+        return !message && message === '';
+    }
+
     return (
-        <Box sx={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            pl: 2,
-            pr: 2,
-            pb: 2
-        }}>
-            <Box sx={{
-                flex: 1,
-                mr: 1,
-            }}>
+        <Grid
+            container
+            alignItems={'flex-end'}
+            sx={{
+                width: '100%',
+                pl: 1,
+                pr: 1,
+                pb: 1,
+            }}
+        >
+            <Grid
+                item
+                xs
+            >
                 <MessageTextArea
                     value={message}
                     onChange={handleOnChange}
                 />
-            </Box>
-            <Box sx={{mb: '3px'}}>
+            </Grid>
+            <Grid
+                item
+                xs={'auto'}
+            >
                 <IconButton
                     color={"secondary"}
                     size={"large"}
                     onClick={handleClick}
-                    disabled={awaitingResponse}
+                    disabled={awaitingResponse || cantSend()}
+                    sx={{
+                        mb: '3px',
+                    }}
                 >
                     <Send/>
                 </IconButton>
-            </Box>
-        </Box>
+            </Grid>
+        </Grid>
     )
 };
 

@@ -1,41 +1,24 @@
-import {useRef, useEffect, FC, ReactNode} from 'react';
-import useMessages from '../hooks/use-messages';
-import {Box} from '@mui/material';
+import {FC, ReactNode} from 'react';
+import {Grid} from '@mui/material';
 
 type Props = {
     children?: ReactNode
 }
 
 const Content: FC<Props> = ({children}) => {
-    const containerRef = useRef<HTMLElement>();
-    const {messages} = useMessages();
-
-    useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTop = containerRef.current.scrollHeight;
-        }
-    }, [messages]);
-
     return (
-        <Box
-            ref={containerRef}
-            component={'main'}
+        <Grid
+            item
             sx={{
-            flex: 1,
-            p: 2,
-            minHeight: '0',
-            overflowY: 'auto',
-        }}>
-            <Box sx={{
-                margin: '0 auto',
+                p: 2,
                 width: {
                     xs: '100%',
                     sm: '500px',
                 }
-            }}>
-                {children}
-            </Box>
-        </Box>
+            }}
+        >
+            {children}
+        </Grid>
     )
 };
 

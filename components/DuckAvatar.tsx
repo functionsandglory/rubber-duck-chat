@@ -6,7 +6,7 @@ type Props = {
     size?: number,
 }
 
-const DuckAvatar:FC<Props> = ({size}) => {
+const DuckAvatar: FC<Props> = ({size}) => {
     return <Avatar
         src={rubberDuck.src}
         alt={'Rubber Duck Therapist'}

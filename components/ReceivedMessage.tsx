@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box} from '@mui/material';
+import {Grid} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 import MessageComponent, {Direction} from './Message';
 import DuckAvatar from './DuckAvatar';
@@ -11,24 +11,36 @@ type Props = {
 
 const ReceivedMessage: FC<Props> = ({message}) => {
     const theme = useTheme();
+
     return (
-        <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-end',
-            mb: 2,
-            mr: 3,
-        }}>
-            <Box sx={{mr: 1}}>
+        <Grid
+            container
+            spacing={1}
+            alignItems={'flex-end'}
+            sx={{
+                mb: 2,
+            }}
+        >
+            <Grid
+                item
+                xs={'auto'}
+            >
                 <DuckAvatar size={50}/>
-            </Box>
-            <MessageComponent
-                message={message}
-                color={theme.palette.primary.main}
-                direction={Direction.LEFT}
-            />
-        </Box>
+            </Grid>
+            <Grid
+                item
+                xs
+                sx={{
+                    mr: 3
+                }}
+            >
+                <MessageComponent
+                    message={message}
+                    color={theme.palette.primary.main}
+                    direction={Direction.LEFT}
+                />
+            </Grid>
+        </Grid>
     )
 };
 
