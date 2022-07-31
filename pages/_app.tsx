@@ -51,21 +51,21 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
                     <meta name="msapplication-TileColor" content="#da532c"/>
                     <meta name="theme-color" content="#ffffff"/>
-                    {/* Google Analytics */}
-                    <Script
-                        src="https://www.googletagmanager.com/gtag/js?id=G-FJM0JW97FQ"
-                        strategy="afterInteractive"
-                    />
-                    <Script id="google-analytics" strategy="afterInteractive">
-                        {`
+                </Head>
+                {/* Google Analytics */}
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-FJM0JW97FQ"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
                             window.dataLayer = window.dataLayer || [];
                             function gtag(){dataLayer.push(arguments);}
                             gtag('js', new Date());
     
                             gtag('config', 'G-FJM0JW97FQ');
                         `}
-                    </Script>
-                </Head>
+                </Script>
                 <Component {...pageProps} />
             </ThemeProvider>
         </Provider>
