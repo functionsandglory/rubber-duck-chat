@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Avatar} from '@mui/material';
-import rubberDuck from '../public/therapist-rubber-duck.png'
+import rubberDuck from '../public/rubber-duck-therapist.png'
 
 type Props = {
     size?: number,
