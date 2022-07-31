@@ -23,7 +23,7 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     {/* Basic Meta */}
                     <title>Rubber Duck Therapy</title>
                     <meta name="description"
-                          content="Rubber duck debugging chat bot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
+                          content="Rubber duck debugging chatbot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
                     <meta name="robots" content="index, follow"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     {/* Open Graph  */}
@@ -31,13 +31,13 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content="Rubber Duck Therapy"/>
                     <meta property="og:description"
-                          content="Rubber duck debugging chat bot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
+                          content="Rubber duck debugging chatbot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
                     <meta property="og:image"
                           content="https://www.rubberducktherapy.app/_next/static/media/therapist-rubber-duck.8d5b54bd.png"/>
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary_large_image"/>
                     <meta name="twitter:description"
-                          content="Rubber duck debugging chat bot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
+                          content="Rubber duck debugging chatbot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
                     <meta name="twitter:title" content="Rubber Duck Therapy"/>
                     <meta name="twitter:site" content="https://rubberducktherapy.app"/>
                     <meta name="twitter:image"
