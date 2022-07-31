@@ -33,7 +33,7 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     <meta property="og:description"
                           content="Rubber duck debugging chatbot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
                     <meta property="og:image"
-                          content="https://www.rubberducktherapy.app/rubber-duck-therapist-sm.png"/>
+                          content="https://rubberducktherapy.app/rubber-duck-therapist-sm.png"/>
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary"/>
                     <meta name="twitter:description"
@@ -41,7 +41,7 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     <meta name="twitter:title" content="Rubber Duck Therapy"/>
                     <meta name="twitter:site" content="https://rubberducktherapy.app"/>
                     <meta name="twitter:image"
-                          content="https://www.rubberducktherapy.app/rubber-duck-therapist-sm.png"/>
+                          content="https://rubberducktherapy.app/rubber-duck-therapist-sm.png"/>
                     <meta name="twitter:creator" content="@FuncsAndGlory"/>
                     {/* Favicon */}
                     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
