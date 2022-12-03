@@ -34,7 +34,7 @@ const AboutModal: FC = () => {
                         </Grid>
                         <Grid item sm xs={12}>
                             <Typography variant={'body1'} gutterBottom>
-                                Hello, I am Dr. Bill Quack! I graduated from Duckmouth University with a Masters in
+                                Hello, I am Dr. Bill Quack! I graduated from Ducksmouth University with a Masters in
                                 Counseling in 2004.
                             </Typography>
                             <Typography variant={'body1'} gutterBottom>
