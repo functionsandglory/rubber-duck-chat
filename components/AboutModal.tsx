@@ -26,7 +26,7 @@ const AboutModal: FC = () => {
             >
                 <DialogTitle>About</DialogTitle>
                 <DialogContent>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={3}>
                         <Grid item sm={'auto'} xs={12}>
                             <Grid item container justifyContent={'center'}>
                                 <DuckAvatar size={100}/>

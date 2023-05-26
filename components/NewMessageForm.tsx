@@ -1,4 +1,4 @@
-import {FC, useState, useEffect} from 'react';
+import {FC, useState, useEffect, KeyboardEvent} from 'react';
 import {Grid, IconButton} from '@mui/material';
 import {Send} from '@mui/icons-material';
 import MessageTextArea from './MessageTextArea';
@@ -13,12 +13,19 @@ const NewMessageForm: FC = () => {
         receiveInitialMessage();
     }, []);
 
-    const handleClick = () => {
+    const handleSend = () => {
         sendMessage({
             message: message,
             type: MessageType.SENT
         });
         setMessage('');
+    };
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSend();
+        }
     };
 
     const handleOnChange = (event) => {
@@ -46,6 +53,7 @@ const NewMessageForm: FC = () => {
             >
                 <MessageTextArea
                     value={message}
+                    onKeyDown={handleKeyDown}
                     onChange={handleOnChange}
                 />
             </Grid>
@@ -55,12 +63,9 @@ const NewMessageForm: FC = () => {
             >
                 <IconButton
                     color={"secondary"}
-                    size={"large"}
-                    onClick={handleClick}
+                    size={"medium"}
+                    onClick={handleSend}
                     disabled={awaitingResponse || cantSend()}
-                    sx={{
-                        mb: '3px',
-                    }}
                 >
                     <Send/>
                 </IconButton>

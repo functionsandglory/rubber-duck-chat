@@ -14,7 +14,7 @@ const Header: FC<Props> = ({children}) => (
     <AppBar
         position={"relative"}
     >
-        <Toolbar>
+        <Toolbar variant="dense">
             <Grid
                 container
                 alignItems={'center'}

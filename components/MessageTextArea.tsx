@@ -5,7 +5,7 @@ import {neutralInputTheme} from '../style/theme';
 
 const MessageTextArea: FC<TextFieldProps> = (props) => (
     <ThemeProvider theme={neutralInputTheme}>
-        <TextField multiline
+        <TextField size="small" multiline
                    sx={{
                        width: '100%',
                        '& .MuiOutlinedInput-root': {
