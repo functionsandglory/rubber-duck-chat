@@ -1,5 +1,5 @@
 import {Configuration, OpenAIApi} from 'openai';
-import type {Message} from '../../src/clients/openai';
+import type {OpenAIMessage} from '../../src/clients/openai';
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -7,7 +7,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const systemMessage: Message = {
+const systemMessage: OpenAIMessage = {
     role: "system",
     content: `You are an Eliza like chatterbot named Dr. Quack.
 You offer to listen to any problem.
@@ -21,7 +21,6 @@ Your first message is always an introduction that includes your name.`
 }
 
 export default async function handler(req, res) {
-    return;
     if (req.method !== 'POST') {
         res.status(405).json({error: 'Method Not Allowed'});
         return
@@ -31,7 +30,7 @@ export default async function handler(req, res) {
         res.status(422).json({error: 'Body must be an array'});
     }
 
-    const messages = req.body as Message[];
+    const messages = req.body as OpenAIMessage[];
 
     const response = await openai.createChatCompletion( {
         model: 'gpt-3.5-turbo',
@@ -41,5 +40,5 @@ export default async function handler(req, res) {
         ],
     });
 
-    return res.status(200).json(response.data.choices[0]);
+    return res.status(200).json(response.data.choices[0].message);
 }

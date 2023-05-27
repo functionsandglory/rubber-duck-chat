@@ -2,13 +2,14 @@ import {
     createSlice,
     createEntityAdapter,
     createAsyncThunk,
+    createAction,
     EntityId,
     Dictionary
 } from '@reduxjs/toolkit';
 import {v4 as uuid} from 'uuid';
 import {random} from 'lodash';
-import eliza from "../utility/eliza";
 import delay from '../utility/delay';
+import {getOpenAIMessage, OpenAIMessage} from '../clients/openai';
 
 export type Messages = {
     entities: Dictionary<Message>,
@@ -39,39 +40,55 @@ const {ids, entities} = messagesAdapter.getInitialState();
 
 export const sendMessage = createAsyncThunk('sendMessage',
     async (newMessage: NewMessage, api) => {
-        api.dispatch(receiveMessage(newMessage));
-        return newMessage;
+        const formattedMessage = buildMessage(newMessage);
+        api.dispatch(receiveMessage(formattedMessage));
+        return formattedMessage;
     }
 );
 
-export const receiveMessage = createAsyncThunk('receiveMessage',
-    async (newMessage: NewMessage, api) => {
-        await delay(random(0.5, 1) * 1000);
-        await api.dispatch(typingMessage());
+export const receiveMessage = createAsyncThunk<Message, Message, {
+    state: {
+        messages: Messages,
+    }
+}>('receiveMessage',
+    async (sentMessage, api) => {
+        const state = api.getState();
+        const selectorAll = messagesAdapter.getSelectors<typeof state>(state => state.messages).selectAll;
 
-        return {
-            message: eliza.transform(newMessage.message),
+        const messageHistory = selectorAll(state);
+        messageHistory.push(sentMessage);
+
+        const contextMessages: OpenAIMessage[] = messageHistory.map((message) => {
+            return {
+                content: message.message,
+                role: message.type === 'received' ? "assistant" : "user"
+            };
+        });
+
+        await delay(random(1000, 2000));
+        api.dispatch(toggleTyping(true));
+
+        const openAIMessage = await getOpenAIMessage(contextMessages);
+
+        return buildMessage({
+            message: openAIMessage.content,
             type: MessageType.RECEIVED
-        };
+        })
     }
 );
 
 export const receiveInitialMessage = createAsyncThunk('receiveInitialMessage',
-    async (undefined, api) => {
-        await api.dispatch(typingMessage());
+    async () => {
+        const openAIMessage = await getOpenAIMessage();
 
         return {
-            message: eliza.getInitial(),
+            message: openAIMessage.content,
             type: MessageType.RECEIVED
         };
     }
 );
 
-export const typingMessage = createAsyncThunk('typingMessage',
-    async () => {
-        await delay(random(1, 3) * 1000);
-    }
-);
+export const toggleTyping = createAction<boolean>('toggleTyping');
 
 const buildMessage = (newMessage: NewMessage): Message => {
     return {
@@ -92,35 +109,34 @@ const messageSlice = createSlice({
     } as Messages,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(sendMessage.fulfilled, (state, {payload}) => {
-            messagesAdapter.addOne(state, buildMessage(payload));
-        });
-
         builder.addCase(sendMessage.pending, (state) => {
             state.awaitingResponse = true;
         });
 
-        builder.addCase(receiveMessage.fulfilled, (state, {payload}) => {
+        builder.addCase(sendMessage.fulfilled, (state, {payload}) => {
             messagesAdapter.addOne(state, buildMessage(payload));
+        });
+
+        builder.addCase(receiveMessage.fulfilled, (state, {payload}) => {
+            messagesAdapter.addOne(state, payload);
             state.awaitingResponse = false;
+            state.isTyping = false;
         });
 
         builder.addCase(receiveInitialMessage.pending, (state) => {
+            state.isTyping = true;
             state.awaitingResponse = true;
         });
 
         builder.addCase(receiveInitialMessage.fulfilled, (state, {payload}) => {
             messagesAdapter.addOne(state, buildMessage(payload));
+            state.isTyping = false;
             state.awaitingResponse = false;
         });
 
-        builder.addCase(typingMessage.pending, (state) => {
-            state.isTyping = true;
-        });
-
-        builder.addCase(typingMessage.fulfilled, (state) => {
-            state.isTyping = false;
-        });
+        builder.addCase(toggleTyping, (state, {payload}) => {
+            state.isTyping = payload;
+        })
     }
 })
 

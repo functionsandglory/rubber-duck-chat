@@ -19,8 +19,8 @@
     "uuid": "^8.3.2",
     "moment": "^2.29.4",
     "lodash": "^4.17.21",
-    "elizanode": "^0.1.0",
-    "openai": "^3.2.1"
+    "openai": "^3.2.1",
+    "wretch": "^2.5.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.5",
