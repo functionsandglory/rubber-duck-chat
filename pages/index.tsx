@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 
-import App from '../components/App';
+import App from '../src/components/App';
 
 const Home: FC = () => {
     return (

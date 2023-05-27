@@ -6,8 +6,8 @@ import {CssBaseline, GlobalStyles} from "@mui/material";
 import {ThemeProvider} from '@mui/material/styles';
 import {Provider} from "react-redux";
 
-import store from '../store/store';
-import theme from '../style/theme';
+import store from '../src/store/store';
+import theme from '../src/style/theme';
 
 const App: FC<AppProps> = ({Component, pageProps}) => {
     return (
