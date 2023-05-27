@@ -13,8 +13,9 @@ type Props = {
 const Header: FC<Props> = ({children}) => (
     <AppBar
         position={"relative"}
+        elevation={1}
     >
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" >
             <Grid
                 container
                 alignItems={'center'}

@@ -7,11 +7,14 @@ import {MessageType} from '../store/messages-slice';
 
 const NewMessageForm: FC = () => {
     const [message, setMessage] = useState<string>('');
-    const {sendMessage, receiveInitialMessage, awaitingResponse} = useMessages();
+    const {sendMessage, receiveInitialMessage, awaitingResponse, messages} = useMessages();
 
     useEffect(() => {
-        receiveInitialMessage();
-    }, []);
+        if (messages.length < 0) {
+            receiveInitialMessage();
+        }
+
+    }, [messages.length, receiveInitialMessage]);
 
     const handleSend = () => {
         sendMessage({

@@ -25,8 +25,8 @@ const AboutModal: FC = () => {
                 fullWidth
             >
                 <DialogTitle>About</DialogTitle>
-                <DialogContent sx={{p: 5}}>
-                    <Grid container spacing={5}>
+                <DialogContent>
+                    <Grid spacing={5} container>
                         <Grid item sm={'auto'} xs={12}>
                             <Grid item container justifyContent={'center'}>
                                 <DuckAvatar size={100}/>
@@ -47,39 +47,33 @@ const AboutModal: FC = () => {
                                 I am excited for the opportunity to listen to you!
                             </Typography>
                         </Grid>
-                        <Grid item
-                              container
-                              justifyContent={'center'}
-                              alignContent={'center'}
-                              direction={'column'}
-                              textAlign={'center'}
-                        >
-                            <Grid item>
-                                <Link
-                                    color={'secondary'}
-                                    underline={'none'}
-                                    target={'_blank'}
-                                    href={'https://en.wikipedia.org/wiki/Rubber_duck_debugging'}
-                                >
-                                    What is rubber duck debugging?
-                                </Link>
-                            </Grid>
-                            <Grid item container justifyContent={'center'} spacing={0.5}>
-                                <Grid item>
-                                    <Typography>Built by</Typography>
-                                </Grid>
-                                <Grid item>
-                                    <Link
-                                        color={'secondary'}
-                                        underline={'none'}
-                                        target={'_blank'}
-                                        href={'https://functionsandglory.dev'}
-                                    >
-                                        Functions and Glory
-                                    </Link>
-                                </Grid>
-
-                            </Grid>
+                    </Grid>
+                    <Grid container
+                          justifyContent={'center'}
+                          alignContent={'center'}
+                          direction={'column'}
+                          textAlign={'center'}
+                          sx={{mt: 5}}
+                    >
+                        <Grid item>
+                            <Link
+                                color={'secondary'}
+                                underline={'none'}
+                                target={'_blank'}
+                                href={'https://en.wikipedia.org/wiki/Rubber_duck_debugging'}
+                            >
+                                What is rubber duck debugging?
+                            </Link>
+                        </Grid>
+                        <Grid container justifyContent={'center'}>
+                            <Typography>Built by  <Link
+                                color={'secondary'}
+                                underline={'none'}
+                                target={'_blank'}
+                                href={'https://functionsandglory.dev'}
+                            >
+                                Functions and Glory
+                            </Link></Typography>
                         </Grid>
                     </Grid>
                 </DialogContent>

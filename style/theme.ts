@@ -3,7 +3,6 @@ import { yellow, grey, deepPurple } from '@mui/material/colors';
 
 const mainTheme = createTheme({
     palette: {
-        //mode: 'dark',
         primary: {
             main: yellow[100],
         },
