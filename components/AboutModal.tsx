@@ -25,8 +25,8 @@ const AboutModal: FC = () => {
                 fullWidth
             >
                 <DialogTitle>About</DialogTitle>
-                <DialogContent>
-                    <Grid container spacing={3}>
+                <DialogContent sx={{p: 5}}>
+                    <Grid container spacing={5}>
                         <Grid item sm={'auto'} xs={12}>
                             <Grid item container justifyContent={'center'}>
                                 <DuckAvatar size={100}/>
@@ -64,15 +64,21 @@ const AboutModal: FC = () => {
                                     What is rubber duck debugging?
                                 </Link>
                             </Grid>
-                            <Grid item>
-                                <Link
-                                    color={'secondary'}
-                                    underline={'none'}
-                                    target={'_blank'}
-                                    href={'https://functionsandglory.dev'}
-                                >
-                                    Built by Functions and Glory
-                                </Link>
+                            <Grid item container justifyContent={'center'} spacing={0.5}>
+                                <Grid item>
+                                    <Typography>Built by</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Link
+                                        color={'secondary'}
+                                        underline={'none'}
+                                        target={'_blank'}
+                                        href={'https://functionsandglory.dev'}
+                                    >
+                                        Functions and Glory
+                                    </Link>
+                                </Grid>
+
                             </Grid>
                         </Grid>
                     </Grid>

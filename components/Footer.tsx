@@ -12,8 +12,7 @@ const Footer: FC<Props> = ({children}) => (
         sx={{
             width: {
                 xs: '100%',
-                sm: '600px',
-                md: '800px',
+                sm: '500px',
             }
         }}
     >
