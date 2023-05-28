@@ -54,20 +54,6 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     <meta name="msapplication-TileColor" content="#da532c"/>
                     <meta name="theme-color" content="#ffffff"/>
                 </Head>
-                {/* Google Analytics */}
-                <Script
-                    src="https://www.googletagmanager.com/gtag/js?id=G-FJM0JW97FQ"
-                    strategy="afterInteractive"
-                />
-                <Script id="google-analytics" strategy="afterInteractive">
-                    {`
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-    
-                            gtag('config', 'G-FJM0JW97FQ');
-                        `}
-                </Script>
                 <Component {...pageProps} />
             </ThemeProvider>
         </Provider>
