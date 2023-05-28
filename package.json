@@ -20,7 +20,8 @@
     "moment": "^2.29.4",
     "lodash": "^4.17.21",
     "openai": "^3.2.1",
-    "wretch": "^2.5.2"
+    "wretch": "^2.5.2",
+    "@vercel/analytics": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.0.5",

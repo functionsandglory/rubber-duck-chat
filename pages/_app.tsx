@@ -5,6 +5,7 @@ import type {AppProps} from 'next/app';
 import {CssBaseline, GlobalStyles} from "@mui/material";
 import {ThemeProvider} from '@mui/material/styles';
 import {Provider} from "react-redux";
+import {Analytics} from '@vercel/analytics/react';
 
 import store from '../src/store/store';
 import theme from '../src/style/theme';
@@ -19,6 +20,7 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     },
                 }}/>
                 <CssBaseline/>
+                <Analytics/>
                 <Head>
                     {/* Basic Meta */}
                     <title>Rubber Duck Therapy</title>
@@ -70,7 +72,6 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
             </ThemeProvider>
         </Provider>
     );
-
 }
 
 export default App
