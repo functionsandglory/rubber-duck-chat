@@ -6,6 +6,7 @@ import {
     NewMessage,
     messagesAdapter
 } from '../store/messages-slice';
+import {copyToClipboard} from "../utility/copy-to-clipboard";
 
 const useMessages = () => {
     const dispatch = useAppDispatch();
@@ -15,13 +16,26 @@ const useMessages = () => {
     const isTyping = useSelector<RootState, boolean>((state) => state.messages.isTyping);
     const awaitingResponse = useSelector<RootState, boolean>(state => state.messages.awaitingResponse);
 
+    const copyMessagesToClipboard = async () => {
+        const messageText = messages.reduce((text, message) => {
+            text += message.type === 'received' ? 'Dr. Quack:' : 'You:';
+            text += '\r\n';
+            text += message.message;
+            text += '\r\n\r\n';
+            return text;
+        }, '');
+
+       await copyToClipboard(messageText.trim());
+    }
+
     return {
         messages,
         sendMessage: (newMessage: NewMessage) => dispatch(sendMessage(newMessage)),
         receiveInitialMessage: () => dispatch(receiveInitialMessage()),
         isTyping,
         awaitingResponse,
-        shouldFetchInitialMessage: !!(messages.length === 0 && !awaitingResponse && !isTyping)
+        shouldFetchInitialMessage: !!(messages.length === 0 && !awaitingResponse && !isTyping),
+        copyMessagesToClipboard,
     };
 };
 

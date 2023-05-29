@@ -33,18 +33,18 @@ const App: FC<AppProps> = ({Component, pageProps}) => {
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content="Rubber Duck Therapy"/>
                     <meta property="og:description"
-                          content="Rubber duck debugging chatbot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
+                          content="Rubber duck debugging chatbot. Powered by OpenAI. Sometimes just talking about your problem will present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
                     <meta property="og:image"
                           content="https://rubberducktherapy.app/rubber-duck-therapist-sm.png"/>
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary"/>
                     <meta name="twitter:description"
-                          content="Rubber duck debugging chatbot. Implemented using Eliza. Sometimes just talking about your problem with present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
+                          content="Rubber duck debugging chatbot. Powered by OpenAI. Sometimes just talking about your problem will present you with the solution. Use Rubber Duck Therapy for all your problem solving needs!"/>
                     <meta name="twitter:title" content="Rubber Duck Therapy"/>
                     <meta name="twitter:site" content="https://rubberducktherapy.app"/>
                     <meta name="twitter:image"
                           content="https://rubberducktherapy.app/rubber-duck-therapist-sm.png"/>
-                    <meta name="twitter:creator" content="@FuncsAndGlory"/>
+                    <meta name="twitter:creator" content="@funcsandglory"/>
                     {/* Favicon */}
                     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
                     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>

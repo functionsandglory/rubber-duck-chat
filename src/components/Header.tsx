@@ -2,39 +2,43 @@ import type {FC, ReactNode} from 'react';
 import {
     AppBar,
     Toolbar,
-    Grid
+    Grid,
 } from '@mui/material';
 import AboutModal from './AboutModal';
+import ShareButton from "./ShareButton";
 
 type Props = {
     children?: ReactNode,
 };
 
-const Header: FC<Props> = ({children}) => (
-    <AppBar
-        position={"relative"}
-        elevation={1}
-    >
-        <Toolbar variant="dense" >
-            <Grid
-                container
-                alignItems={'center'}
-            >
+const Header: FC<Props> = ({children}) => {
+    return (
+        <AppBar
+            position={"relative"}
+            elevation={1}
+        >
+            <Toolbar variant="dense">
                 <Grid
-                    item
-                    xs
+                    container
+                    alignItems={'center'}
                 >
-                    {children}
+                    <Grid
+                        item
+                        xs
+                    >
+                        {children}
+                    </Grid>
+                    <Grid
+                        item
+                        xs={'auto'}
+                    >
+                        <ShareButton/>
+                        <AboutModal/>
+                    </Grid>
                 </Grid>
-                <Grid
-                    item
-                    xs={'auto'}
-                >
-                    <AboutModal/>
-                </Grid>
-            </Grid>
-        </Toolbar>
-    </AppBar>
-);
+            </Toolbar>
+        </AppBar>
+    )
+};
 
 export default Header;
