@@ -17,7 +17,7 @@ const useMessages = () => {
     const awaitingResponse = useSelector<RootState, boolean>(state => state.messages.awaitingResponse);
 
     const copyMessagesToClipboard = async () => {
-        const messageText = messages.reduce((text, message) => {
+        let messageText = messages.reduce((text, message) => {
             text += message.type === 'received' ? 'Dr. Quack:' : 'You:';
             text += '\r\n';
             text += message.message;
@@ -25,7 +25,10 @@ const useMessages = () => {
             return text;
         }, '');
 
-       await copyToClipboard(messageText.trim());
+        messageText = messageText.trim();
+        messageText += '\r\n\r\n---\r\nhttps://rubberducktherapy.app';
+
+       await copyToClipboard(messageText);
     }
 
     return {
