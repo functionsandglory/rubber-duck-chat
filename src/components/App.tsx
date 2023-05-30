@@ -30,7 +30,7 @@ const App: FC = () => {
             <Snackbar open={isError}
                       autoHideDuration={4000}
                       onClose={() => dispatch(toggleIsError(false))}
-                      anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+                      anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
             >
                 <Alert severity="error">Something went wrong</Alert>
             </Snackbar>
