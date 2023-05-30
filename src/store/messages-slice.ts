@@ -16,6 +16,7 @@ export type Messages = {
     ids: EntityId[],
     isTyping: boolean,
     awaitingResponse: boolean,
+    isError: boolean,
 };
 
 export type Message = {
@@ -89,6 +90,7 @@ export const receiveInitialMessage = createAsyncThunk('receiveInitialMessage',
 );
 
 export const toggleTyping = createAction<boolean>('toggleTyping');
+export const toggleIsError = createAction<boolean>('toggleIsError');
 
 const buildMessage = (newMessage: NewMessage): Message => {
     return {
@@ -123,6 +125,12 @@ const messageSlice = createSlice({
             state.isTyping = false;
         });
 
+        builder.addCase(receiveMessage.rejected, (state) => {
+            state.isTyping = false;
+            state.awaitingResponse = false;
+            state.isError = true;
+        });
+
         builder.addCase(receiveInitialMessage.pending, (state) => {
             state.isTyping = true;
             state.awaitingResponse = true;
@@ -134,8 +142,18 @@ const messageSlice = createSlice({
             state.awaitingResponse = false;
         });
 
+        builder.addCase(receiveInitialMessage.rejected, (state) => {
+            state.isTyping = false;
+            state.awaitingResponse = false;
+            state.isError = true;
+        });
+
         builder.addCase(toggleTyping, (state, {payload}) => {
             state.isTyping = payload;
+        });
+
+        builder.addCase(toggleIsError, (state, {payload}) => {
+            state.isError = payload;
         })
     }
 })

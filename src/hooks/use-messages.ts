@@ -4,7 +4,8 @@ import {
     sendMessage,
     receiveInitialMessage,
     NewMessage,
-    messagesAdapter
+    messagesAdapter,
+    toggleIsError,
 } from '../store/messages-slice';
 import {copyToClipboard} from "../utility/copy-to-clipboard";
 
@@ -15,6 +16,7 @@ const useMessages = () => {
     const messages = useSelector(selectors.selectAll);
     const isTyping = useSelector<RootState, boolean>((state) => state.messages.isTyping);
     const awaitingResponse = useSelector<RootState, boolean>(state => state.messages.awaitingResponse);
+    const isError = useSelector<RootState, boolean>((state) => state.messages.isError);
 
     const copyMessagesToClipboard = async () => {
         let messageText = messages.reduce((text, message) => {
@@ -39,6 +41,8 @@ const useMessages = () => {
         awaitingResponse,
         shouldFetchInitialMessage: !!(messages.length === 0 && !awaitingResponse && !isTyping),
         copyMessagesToClipboard,
+        isError,
+        toggleIsError,
     };
 };
 
