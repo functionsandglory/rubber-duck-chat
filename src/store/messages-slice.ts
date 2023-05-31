@@ -90,7 +90,6 @@ export const receiveInitialMessage = createAsyncThunk('receiveInitialMessage',
 );
 
 export const toggleTyping = createAction<boolean>('toggleTyping');
-export const toggleIsError = createAction<boolean>('toggleIsError');
 
 const buildMessage = (newMessage: NewMessage): Message => {
     return {
@@ -113,6 +112,7 @@ const messageSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(sendMessage.pending, (state) => {
             state.awaitingResponse = true;
+            state.isError = false;
         });
 
         builder.addCase(sendMessage.fulfilled, (state, {payload}) => {
@@ -151,10 +151,6 @@ const messageSlice = createSlice({
         builder.addCase(toggleTyping, (state, {payload}) => {
             state.isTyping = payload;
         });
-
-        builder.addCase(toggleIsError, (state, {payload}) => {
-            state.isError = payload;
-        })
     }
 })
 

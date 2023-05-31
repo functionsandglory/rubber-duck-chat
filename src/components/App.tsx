@@ -1,8 +1,6 @@
 import {FC} from 'react';
 import {
     Grid,
-    Snackbar,
-    Alert,
 } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
@@ -12,12 +10,10 @@ import NewMessageForm from './NewMessageForm';
 import Title from './Title';
 import {useEffect, useRef} from "react";
 import useMessages from "../hooks/use-messages";
-import {useAppDispatch} from "../store/store";
 
 const App: FC = () => {
     const containerRef = useRef<HTMLElement>();
-    const {messages, isError, toggleIsError} = useMessages();
-    const dispatch = useAppDispatch();
+    const {messages} = useMessages();
 
     useEffect(() => {
         if (containerRef.current) {
@@ -26,55 +22,47 @@ const App: FC = () => {
     }, [messages]);
 
     return (
-        <>
-            <Snackbar open={isError}
-                      autoHideDuration={4000}
-                      onClose={() => dispatch(toggleIsError(false))}
-                      anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
-            >
-                <Alert severity="error">Something went wrong</Alert>
-            </Snackbar>
+
+        <Grid
+            container
+            direction={'column'}
+            sx={{
+                height: '100%',
+                backgroundColor: 'grey.100'
+            }}
+        >
             <Grid
+                item
+            >
+                <Header>
+                    <Title/>
+                </Header>
+            </Grid>
+            <Grid
+                component={'main'}
+                ref={containerRef}
+                item
                 container
-                direction={'column'}
+                justifyContent={'center'}
+                xs
                 sx={{
-                    height: '100%',
-                    backgroundColor: 'grey.100'
+                    overflowY: 'auto'
                 }}
             >
-                <Grid
-                    item
-                >
-                    <Header>
-                        <Title/>
-                    </Header>
-                </Grid>
-                <Grid
-                    component={'main'}
-                    ref={containerRef}
-                    item
-                    container
-                    justifyContent={'center'}
-                    xs
-                    sx={{
-                        overflowY: 'auto'
-                    }}
-                >
-                    <Content>
-                        <Messages/>
-                    </Content>
-                </Grid>
-                <Grid
-                    item
-                    container
-                    justifyContent={'center'}
-                >
-                    <Footer>
-                        <NewMessageForm/>
-                    </Footer>
-                </Grid>
+                <Content>
+                    <Messages/>
+                </Content>
             </Grid>
-        </>
+            <Grid
+                item
+                container
+                justifyContent={'center'}
+            >
+                <Footer>
+                    <NewMessageForm/>
+                </Footer>
+            </Grid>
+        </Grid>
     )
 };
 

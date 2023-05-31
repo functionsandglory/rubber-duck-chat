@@ -17,7 +17,7 @@ const ShareButton = () => {
             onClose={() => setOpen(false)}
             autoHideDuration={2000}
             message="Chat copied to clipboard"
-            anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         />
     </>
 
