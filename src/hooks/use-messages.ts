@@ -5,7 +5,6 @@ import {
     receiveInitialMessage,
     NewMessage,
     messagesAdapter,
-    toggleIsError,
 } from '../store/messages-slice';
 import {copyToClipboard} from "../utility/copy-to-clipboard";
 
@@ -42,7 +41,6 @@ const useMessages = () => {
         shouldFetchInitialMessage: !!(messages.length === 0 && !awaitingResponse && !isTyping),
         copyMessagesToClipboard,
         isError,
-        toggleIsError,
     };
 };
 
