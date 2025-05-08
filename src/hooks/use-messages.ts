@@ -38,7 +38,7 @@ const useMessages = () => {
         receiveInitialMessage: () => dispatch(receiveInitialMessage()),
         isTyping,
         awaitingResponse,
-        shouldFetchInitialMessage: !!(messages.length === 0 && !awaitingResponse && !isTyping),
+        shouldFetchInitialMessage: !!(messages.length === 0 && !awaitingResponse && !isTyping && !isError),
         copyMessagesToClipboard,
         isError,
     };

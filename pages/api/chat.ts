@@ -1,11 +1,9 @@
-import {Configuration, OpenAIApi} from 'openai';
+import OpenAI from 'openai';
 import type {OpenAIMessage} from '../../src/clients/openai';
 
-const configuration = new Configuration({
+const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-
-const openai = new OpenAIApi(configuration);
 
 const systemMessage: OpenAIMessage = {
     role: "system",
@@ -35,7 +33,7 @@ export default async function handler(req, res) {
 
     const messages = req.body as OpenAIMessage[];
 
-    const response = await openai.createChatCompletion( {
+    const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
         messages: [
             systemMessage,
@@ -43,5 +41,5 @@ export default async function handler(req, res) {
         ],
     });
 
-    return res.status(200).json(response.data.choices[0].message);
+    return res.status(200).json(response.choices[0].message);
 }
